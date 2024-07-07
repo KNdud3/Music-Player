@@ -1,13 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <title>Hello World!</title>
     <script defer src="render.js"> </script>
     <link rel="stylesheet" href="index.css" />
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css"/> 
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/> 
   </head>
   <body>
     <h1> Hello World!</h1>
     <p>Welcome to your Electron application.</p>
+    <p class = "buttons"></p>
+      <button class="button" id = "backward">
+      <i class="fa-solid fa-backward"></i>
+      </button>
+      <button class="button" id = "test">
+      <i class="fa-solid fa-play" id  = "play"></i>
+      </button>
+      <button class="button" id = "forward">
+      <i class="fa-solid fa-forward"></i>
+      </button>
+    <p>
   </body>
 </html>
