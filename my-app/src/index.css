@@ -8,7 +8,7 @@ body {
   align-items: center; /* Center the content horizontally */
 }
 
-.buttons {
+.controlButtons {
   display: flex;
   flex-direction: row;
   align-items: center; /* Center the content horizontally */

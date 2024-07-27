@@ -1,7 +1,7 @@
 <!DOCTYPE html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello World!</title>
+    <title>Music Player</title>
     <script defer src="render.js"> </script>
     <link rel="stylesheet" href="index.css" />
     <link
@@ -13,15 +13,13 @@
   </head>
   <body>
 
-    <h1> Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
 
     <audio id = "music" loop>
-      <source src="test.wav" type="audio/wav">
+      <source src="songs/test.wav" type="audio/wav">
       Your browser does not support the audio tag.
     </audio>
 
-    <div class = "buttons">
+    <div class = "controlButtons">
       <button class="button" id = "backward">
       <i class="fa-solid fa-backward"></i>
       </button>
@@ -34,8 +32,14 @@
     </div>
 
     <button class="button is-responsive" id="files">
-      Open Files
+      Load Songs
     </button>
+
+    <button class="button is-responsive" id="addSong">
+      Add Songs
+    </button>
+
+    <ul id="fileList"></ul>
 
 
   </body>
