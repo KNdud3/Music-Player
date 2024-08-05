@@ -4,6 +4,11 @@ const forwardButton = document.getElementById("forward");
 const backButton = document.getElementById("backward");
 const fileButton = document.getElementById("files")
 
+const song = document.getElementById("song") // has songs/ before the file name
+
+var audio = document.getElementById('music');
+
+// Add Song button config
 document.getElementById('addSong').addEventListener('click', async () => {
   const result = await window.versions.selectAndCopyFiles();
   if (result.canceled) {
@@ -16,6 +21,7 @@ document.getElementById('addSong').addEventListener('click', async () => {
   }
 });
 
+// Load Files
 fileButton.onclick = async () => {
   try {
     const files = await window.versions.getDirectoryFiles('src/songs');
@@ -28,7 +34,15 @@ fileButton.onclick = async () => {
     fileList.innerHTML = '';
     files.forEach(file => {
       const li = document.createElement('li');
-      li.textContent = file;
+      const button = document.createElement('button');
+      button.textContent = file;
+      button.addEventListener('click', () => {
+        alert(`${file} is now playing`);
+        song.src = file
+        console.log(song.src)
+        audio.load();
+      });
+      li.appendChild(button);
       fileList.appendChild(li);
     });
   } catch (error) {
@@ -39,8 +53,7 @@ fileButton.onclick = async () => {
 
 const icon = document.getElementById("play"); // Inside of play button
 
-var audio = document.getElementById('music');
-
+// Play Button
 playButton.onclick = () => {
   if (icon.classList.contains('fa-play')) {
     icon.classList.remove('fa-play');
@@ -49,7 +62,7 @@ playButton.onclick = () => {
     });
     icon.classList.add('fa-pause');
   } 
-  else {
+  else {   
     icon.classList.remove('fa-pause');
     audio.pause();
     icon.classList.add('fa-play');

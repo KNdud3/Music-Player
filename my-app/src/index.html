@@ -15,31 +15,34 @@
 
 
     <audio id = "music" loop>
-      <source src="songs/test.wav" type="audio/wav">
+      <source src="songs/test.wav" type="audio/wav" id = "song">
       Your browser does not support the audio tag.
     </audio>
 
-    <div class = "controlButtons">
-      <button class="button" id = "backward">
-      <i class="fa-solid fa-backward"></i>
+  <div class = "controlButtons">
+    <button class="button" id = "backward">
+    <i class="fa-solid fa-backward"></i>
+    </button>
+    <button class="button" id = "pausePlay">
+    <i class="fa-solid fa-play" id  = "play"></i>
+    </button>
+    <button class="button" id = "forward">
+    <i class="fa-solid fa-forward"></i>
+    </button>
+  </div>
+
+  <p>
+    <div class = "fileButtons">
+      <button class="button is-responsive" id="files">
+        Load Songs
       </button>
-      <button class="button" id = "pausePlay">
-      <i class="fa-solid fa-play" id  = "play"></i>
-      </button>
-      <button class="button" id = "forward">
-      <i class="fa-solid fa-forward"></i>
+      <button class="button is-responsive" id="addSong">
+        Add Songs
       </button>
     </div>
+  </p>
 
-    <button class="button is-responsive" id="files">
-      Load Songs
-    </button>
-
-    <button class="button is-responsive" id="addSong">
-      Add Songs
-    </button>
-
-    <ul id="fileList"></ul>
+  <ul id="fileList"></ul>
 
 
   </body>

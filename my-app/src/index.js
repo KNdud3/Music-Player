@@ -93,7 +93,7 @@ ipcMain.handle('selectAndCopyFiles', async () => {
       result.filePaths.forEach(filePath => {
         const fileName = path.basename(filePath);
         const uniqueFileName = getUniqueFileName(destinationDir, fileName);
-        const destinationPath = path.join(destinationDir, fileName);
+        const destinationPath = path.join(destinationDir, uniqueFileName);
         fs.copyFileSync(filePath, destinationPath);
       });
       return { canceled: false, filePaths: result.filePaths };
