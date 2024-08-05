@@ -2,24 +2,36 @@
 const playButton = document.getElementById("pausePlay");
 const forwardButton = document.getElementById("forward");
 const backButton = document.getElementById("backward");
-const fileButton = document.getElementById("files")
+const fileButton = document.getElementById("files");
+const addSongButton = document.getElementById('addSong');
 
-const song = document.getElementById("song") // has songs/ before the file name
+const icon = document.getElementById("play"); // Inside of play button
 
-var audio = document.getElementById('music');
+const song = document.getElementById("song") // Has songs/ before the file name
+
+const playingText = document.getElementById("playing")
+
+var audio = document.getElementById('music'); // Audio tag as a whole
+
+const playedAmount = document.getElementById('playedAmount'); // Needs fixing
+    audio.addEventListener('timeupdate', () => {
+      const percentagePlayed = (audio.currentTime / audio.duration) * 100;
+      playedAmount.style.width = `${percentagePlayed}%`;
+    });
 
 // Add Song button config
-document.getElementById('addSong').addEventListener('click', async () => {
+ addSongButton.onclick = async () => {
   const result = await window.versions.selectAndCopyFiles();
   if (result.canceled) {
-    console.log('File selection was canceled.');
-  } else if (result.error) {
+    pass
+  } 
+  else if (result.error) {
     alert(`Error: ${result.error}`);
-  } else {
-    console.log('Files added:', result.filePaths);
+  } 
+  else {
     alert('Files added successfully');
   }
-});
+};
 
 // Load Files
 fileButton.onclick = async () => {
@@ -37,21 +49,21 @@ fileButton.onclick = async () => {
       const button = document.createElement('button');
       button.textContent = file;
       button.addEventListener('click', () => {
-        alert(`${file} is now playing`);
-        song.src = file
-        console.log(song.src)
+        song.src = `songs/${file}`
         audio.load();
+        playingText.innerHTML = `Now playing: ${file}`
+        if (icon.classList.contains('fa-pause')) {
+          pauseSong();
+        }
       });
       li.appendChild(button);
       fileList.appendChild(li);
     });
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Error fetching files:', error);
   }
 };
-
-
-const icon = document.getElementById("play"); // Inside of play button
 
 // Play Button
 playButton.onclick = () => {
@@ -63,10 +75,15 @@ playButton.onclick = () => {
     icon.classList.add('fa-pause');
   } 
   else {   
-    icon.classList.remove('fa-pause');
-    audio.pause();
-    icon.classList.add('fa-play');
+    pauseSong();
   }
 };
+
+// Pauses song
+function pauseSong(){
+  icon.classList.remove('fa-pause');
+  audio.pause();
+  icon.classList.add('fa-play');
+}
 
 

@@ -16,8 +16,10 @@
 
     <audio id = "music" loop>
       <source src="songs/test.wav" type="audio/wav" id = "song">
-      Your browser does not support the audio tag.
+      There is an error with the app supporting the audio tag.
     </audio>
+
+    <p id="playing">No song is currently playing</p>
 
   <div class = "controlButtons">
     <button class="button" id = "backward">
@@ -29,6 +31,10 @@
     <button class="button" id = "forward">
     <i class="fa-solid fa-forward"></i>
     </button>
+  </div>
+
+  <div class="playBar">
+    <div class="playedAmount"></div>
   </div>
 
   <p>

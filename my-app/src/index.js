@@ -56,13 +56,14 @@ ipcMain.handle('get-directory-files', async (event, dirPath) => {
   try {
     const files = fs.readdirSync(dirPath);
     return files;
-  } catch (error) {
+  } 
+  catch (error) {
     return { error: error.message };
   }
 });
 
 
-// Helper function to resolve file name conflicts
+// Helper function to resolve file name conflicts (used when adding files)
 function getUniqueFileName(directory, fileName) {
   let baseName = path.basename(fileName, path.extname(fileName));
   let extension = path.extname(fileName);

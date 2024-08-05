@@ -17,3 +17,19 @@ body {
   row-gap: 50px;
   align-items: center; 
 }
+
+.playBar{
+  width:50%;
+  background:rgb(70, 69, 69);
+  height:10px;
+  border-radius: 20px;
+  align-items: center; 
+}
+
+.playedAmount{
+  width:0;
+  background:black;
+  height:10px;
+  border-radius: 20px;
+  align-items: center; 
+}
