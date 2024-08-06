@@ -52,9 +52,10 @@ app.on('window-all-closed', () => {
 });
 
 // Used to get files from a specified directory
-ipcMain.handle('get-directory-files', async (event, dirPath) => {
+ipcMain.handle('get-directory-files', async (event) => {
   try {
-    const files = fs.readdirSync(dirPath);
+    createDirectories();
+    const files = fs.readdirSync('src/songs');
     return files;
   } 
   catch (error) {
@@ -89,6 +90,7 @@ ipcMain.handle('selectAndCopyFiles', async () => {
   if (result.canceled) {
     return { canceled: true };
   } else {
+    createDirectories();
     const destinationDir = 'src/songs';
     try {
       result.filePaths.forEach(filePath => {
@@ -103,3 +105,14 @@ ipcMain.handle('selectAndCopyFiles', async () => {
     }
   }
 });
+
+// Helper function to create directories if they do not exist
+const createDirectories = async () => {
+  const dirPath = path.join(__dirname, 'src', 'songs');
+
+  try {
+    await fs.promises.mkdir(dirPath, { recursive: true });
+  } catch (err) {
+    console.error('Error creating directories:', err);
+  }
+};

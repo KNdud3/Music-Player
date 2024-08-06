@@ -13,9 +13,11 @@ const playingText = document.getElementById("playing")
 
 var audio = document.getElementById('music'); // Audio tag as a whole
 
-const playedAmount = document.getElementById('playedAmount'); // Needs fixing
+const playedAmount = document.getElementById('playedAmount');
+const timeText = document.getElementById('time')
     audio.addEventListener('timeupdate', () => {
       const percentagePlayed = (audio.currentTime / audio.duration) * 100;
+      timeText.innerHTML = `${Math.trunc(audio.currentTime)} / ${Math.trunc(audio.duration)}`
       playedAmount.style.width = `${percentagePlayed}%`;
     });
 
@@ -36,7 +38,7 @@ const playedAmount = document.getElementById('playedAmount'); // Needs fixing
 // Load Files
 fileButton.onclick = async () => {
   try {
-    const files = await window.versions.getDirectoryFiles('src/songs');
+    const files = await window.versions.getDirectoryFiles();
     if (files.error) {
       alert(`Error: ${files.error}`);
       return;
@@ -48,13 +50,14 @@ fileButton.onclick = async () => {
       const li = document.createElement('li');
       const button = document.createElement('button');
       button.textContent = file;
-      button.addEventListener('click', () => {
+      button.addEventListener('click', () => { // Make buttons for each file that change the song
         song.src = `songs/${file}`
         audio.load();
         playingText.innerHTML = `Now playing: ${file}`
         if (icon.classList.contains('fa-pause')) {
           pauseSong();
         }
+        playedAmount.style.width = 0;
       });
       li.appendChild(button);
       fileList.appendChild(li);

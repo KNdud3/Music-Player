@@ -31,5 +31,7 @@ body {
   background:black;
   height:10px;
   border-radius: 20px;
+  transition: width 0.2s linear;
+  will-change: width;
   align-items: center; 
 }

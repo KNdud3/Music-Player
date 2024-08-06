@@ -14,12 +14,12 @@
   <body>
 
 
-    <audio id = "music" loop>
-      <source src="songs/test.wav" type="audio/wav" id = "song">
-      There is an error with the app supporting the audio tag.
-    </audio>
+  <audio id = "music">
+    <source src="songs/test.wav" type="audio/wav" id = "song">
+    There is an error with the app supporting the audio tag.
+  </audio>
 
-    <p id="playing">No song is currently playing</p>
+  <p id="playing">No song is currently playing</p>
 
   <div class = "controlButtons">
     <button class="button" id = "backward">
@@ -34,8 +34,9 @@
   </div>
 
   <div class="playBar">
-    <div class="playedAmount"></div>
+    <div class="playedAmount" id = "playedAmount"></div>
   </div>
+  <p id =time>--/--</p>
 
   <p>
     <div class = "fileButtons">
