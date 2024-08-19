@@ -1,6 +1,9 @@
 const { app, BrowserWindow, ipcMain, dialog} = require('electron');
 const path = require('node:path');
 const fs = require('fs');
+const bcrypt = require('bcrypt');
+const db = require('./database');
+
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {

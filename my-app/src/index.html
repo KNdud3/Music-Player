@@ -13,43 +13,61 @@
   </head>
   <body>
 
+  <div id = "app">
+    <audio id = "music">
+      <source src="songs/test.wav" type="audio/wav" id = "song">
+      There is an error with the app supporting the audio tag.
+    </audio>
 
-  <audio id = "music">
-    <source src="songs/test.wav" type="audio/wav" id = "song">
-    There is an error with the app supporting the audio tag.
-  </audio>
+    <p id="playing">No song is currently playing</p>
 
-  <p id="playing">No song is currently playing</p>
-
-  <div class = "controlButtons">
-    <button class="button" id = "backward">
-    <i class="fa-solid fa-backward"></i>
-    </button>
-    <button class="button" id = "pausePlay">
-    <i class="fa-solid fa-play" id  = "play"></i>
-    </button>
-    <button class="button" id = "forward">
-    <i class="fa-solid fa-forward"></i>
-    </button>
-  </div>
-
-  <div class="playBar">
-    <div class="playedAmount" id = "playedAmount"></div>
-  </div>
-  <p id =time>--/--</p>
-
-  <p>
-    <div class = "fileButtons">
-      <button class="button is-responsive" id="files">
-        Load Songs
+    <div class = "controlButtons">
+      <button class="button" id = "backward">
+      <i class="fa-solid fa-backward"></i>
       </button>
-      <button class="button is-responsive" id="addSong">
-        Add Songs
+      <button class="button" id = "pausePlay">
+      <i class="fa-solid fa-play" id  = "play"></i>
+      </button>
+      <button class="button" id = "forward">
+      <i class="fa-solid fa-forward"></i>
       </button>
     </div>
-  </p>
 
-  <ul id="fileList"></ul>
+    <div class="playBar">
+      <div id = "playedAmount"></div>
+    </div>
+    <p id =time>--/--</p>
+
+    <p>
+      <div class = "fileButtons">
+        <button class="button is-responsive" id="files">
+          Load Songs
+        </button>
+        <button class="button is-responsive" id="addSong">
+          Add Songs
+        </button>
+    </p>
+  </div>
+
+    <ul id="fileList"></ul>
+  </div>
+  
+  <div id="login" class="hidden">
+    <h2>Login</h2>
+    <input type="text" id="login-username" placeholder="Username" />
+    <input type="password" id="login-password" placeholder="Password" />
+    <button id="login" class="button is-responsive">Login</button>
+    <button id="register(login)" class="button is-responsive">Register</button>
+  </div>
+
+  <div id="register" class="hidden">
+    <h2>Register</h2>
+    <input type="text" id="register-username" placeholder="Username" />
+    <input type="password" id="register-password" placeholder="Password" />
+    <button id="register" class="button is-responsive">Register</button>
+    <button id="login(register)" class="button is-responsive">Register</button>
+    
+  </div>
 
 
   </body>
