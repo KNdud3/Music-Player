@@ -1,4 +1,4 @@
-// Buttons
+// Buttons for main app
 const playButton = document.getElementById("pausePlay");
 const forwardButton = document.getElementById("forward");
 const backButton = document.getElementById("backward");
@@ -15,6 +15,40 @@ var audio = document.getElementById('music'); // Audio tag as a whole
 
 const playedAmount = document.getElementById('playedAmount');
 const timeText = document.getElementById('time')
+const registerButton = document.getElementById('register')
+const loginButton = document.getElementById("login")
+const registerToLogin = document.getElementById('login(register)')
+const loginToRegister = document.getElementById('register(login)')
+
+loginButton.onclick = async () => {
+  const username = document.getElementById('loginUsername').value;
+  const password = document.getElementById('loginPassword').value;
+  const result = await window.versions.loginUser(username,password);
+  if (result.success){
+    document.getElementById('loginId').classList.add('hidden')
+    document.getElementById('main').classList.remove('hidden')
+  }
+  else{
+    alert(`Login failed: ${result.error}`)
+  }
+}
+
+registerToLogin.onclick = async () => {
+  document.getElementById('registerId').classList.add('hidden')
+  document.getElementById('loginId').classList.remove('hidden')
+}
+
+loginToRegister.onclick = async () => {
+  document.getElementById('registerId').classList.remove('hidden')
+  document.getElementById('loginId').classList.add('hidden')
+}
+
+registerButton.onclick = async () => {
+  const username = document.getElementById('registerUsername').value;
+  const password = document.getElementById('registerPassword').value;
+  window.versions.registerUser(username, password);
+  document.getElementById('success').innerHTML = `You Have Been Registered Successfully`;
+}
 
 // Used to change the displays for the progress bar and the time the song has run for
 audio.addEventListener('timeupdate', () => {

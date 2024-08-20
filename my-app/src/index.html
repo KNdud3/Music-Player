@@ -13,7 +13,7 @@
   </head>
   <body>
 
-  <div id = "app">
+  <div id = "main" class = "hidden" class = "app">
     <audio id = "music">
       <source src="songs/test.wav" type="audio/wav" id = "song">
       There is an error with the app supporting the audio tag.
@@ -33,7 +33,7 @@
       </button>
     </div>
 
-    <div class="playBar">
+    <div id="playBar">
       <div id = "playedAmount"></div>
     </div>
     <p id =time>--/--</p>
@@ -52,20 +52,21 @@
     <ul id="fileList"></ul>
   </div>
   
-  <div id="login" class="hidden">
+  <div id="loginId" class = "app">
     <h2>Login</h2>
-    <input type="text" id="login-username" placeholder="Username" />
-    <input type="password" id="login-password" placeholder="Password" />
+    <input type="text" id="loginUsername" placeholder="Username" />
+    <input type="password" id="loginPassword" placeholder="Password" />
     <button id="login" class="button is-responsive">Login</button>
     <button id="register(login)" class="button is-responsive">Register</button>
   </div>
 
-  <div id="register" class="hidden">
+  <div id="registerId" class="hidden" class = "app">
     <h2>Register</h2>
-    <input type="text" id="register-username" placeholder="Username" />
-    <input type="password" id="register-password" placeholder="Password" />
+    <input type="text" id="registerUsername" placeholder="Username" />
+    <input type="password" id="registerPassword" placeholder="Password" />
     <button id="register" class="button is-responsive">Register</button>
-    <button id="login(register)" class="button is-responsive">Register</button>
+    <button id="login(register)" class="button is-responsive">Login</button>
+    <p id="success"></p>
     
   </div>
 

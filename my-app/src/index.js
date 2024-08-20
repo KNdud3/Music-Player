@@ -55,7 +55,7 @@ app.on('window-all-closed', () => {
 });
 
 // Used to get files from a specified directory
-ipcMain.handle('get-directory-files', async (event) => {
+ipcMain.handle('getDirectoryFiles', async (event) => {
   try {
     createDirectories();
     const files = fs.readdirSync('src/songs');
@@ -119,3 +119,34 @@ const createDirectories = async () => {
     console.error('Error creating directories:', err);
   }
 };
+
+// Handle user registration
+ipcMain.handle('registerUser', async (event, usern, password) => {
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await db('users').insert({ username: `${usern}`, password: hashedPassword });
+    return { success: true };
+  } 
+  catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+// Handle user login
+ipcMain.handle('loginUser', async (event, username, password) => {
+  try {
+    const user = await db('users').where({ username }).first();
+    if (!user) {
+      return { success: false, error: 'User not found' };
+    }
+
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    if (!isPasswordCorrect) {
+      return { success: false, error: 'Incorrect password' };
+    }
+
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
