@@ -7,14 +7,14 @@ const db = require('knex')({
   });
 
   // Create users table if it doesn't exist
-  db.schema.hasTable('users').then(exists => {
+  db.schema.hasTable('users').then(function (exists) {
     if (!exists) {
-      return db.schema.createTable('users', table => {
+      return db.schema.createTable('users', function (table) {
         table.increments('id').primary();
         table.string('username').notNullable().unique();
         table.string('password').notNullable();
       });
     }
-  })
+  });
 
 module.exports = db;

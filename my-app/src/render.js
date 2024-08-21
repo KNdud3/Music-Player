@@ -27,9 +27,10 @@ loginButton.onclick = async () => {
   if (result.success){
     document.getElementById('loginId').classList.add('hidden')
     document.getElementById('main').classList.remove('hidden')
+    document.getElementById('main').classList.add('app')
   }
   else{
-    alert(`Login failed: ${result.error}`)
+    document.getElementById('fail').innerHTML = `Login Failed: ${result.error}`
   }
 }
 
@@ -40,14 +41,20 @@ registerToLogin.onclick = async () => {
 
 loginToRegister.onclick = async () => {
   document.getElementById('registerId').classList.remove('hidden')
+  document.getElementById('registerId').classList.add('app')
   document.getElementById('loginId').classList.add('hidden')
 }
 
 registerButton.onclick = async () => {
   const username = document.getElementById('registerUsername').value;
   const password = document.getElementById('registerPassword').value;
-  window.versions.registerUser(username, password);
-  document.getElementById('success').innerHTML = `You Have Been Registered Successfully`;
+  const result = await window.versions.registerUser(username, password);
+  if (result.success){
+    document.getElementById('success').innerHTML = `You Have Been Registered Successfully`;
+  }
+  else{
+    document.getElementById('success').innerHTML = `Registration Failed: ${result.error}`
+  }
 }
 
 // Used to change the displays for the progress bar and the time the song has run for

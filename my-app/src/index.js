@@ -62,7 +62,7 @@ ipcMain.handle('getDirectoryFiles', async (event) => {
     return files;
   } 
   catch (error) {
-    return { error: error.message };
+    return {error: error.message};
   }
 });
 
@@ -72,7 +72,7 @@ function getUniqueFileName(directory, fileName) {
   let baseName = path.basename(fileName, path.extname(fileName));
   let extension = path.extname(fileName);
   let newFileName = fileName;
-  let counter = 1;
+  let counter = 1; // Counter is the nuymber added to end of the file
 
   while (fs.existsSync(path.join(directory, newFileName))) {
     newFileName = `${baseName} (${counter})${extension}`;
@@ -87,7 +87,7 @@ function getUniqueFileName(directory, fileName) {
 ipcMain.handle('selectAndCopyFiles', async () => {
   const result = await dialog.showOpenDialog({
     properties: ['openFile', 'multiSelections'],
-    filters: [{ name: 'Music Files', extensions: ['mp3', 'wav'] }],
+    filters: [{name: 'Music Files', extensions: ['mp3','wav','ogg']}],
   });
 
   if (result.canceled) {
@@ -102,9 +102,10 @@ ipcMain.handle('selectAndCopyFiles', async () => {
         const destinationPath = path.join(destinationDir, uniqueFileName);
         fs.copyFileSync(filePath, destinationPath);
       });
-      return { canceled: false, filePaths: result.filePaths };
-    } catch (error) {
-      return { error: error.message };
+      return {canceled: false, filePaths: result.filePaths};
+    } 
+    catch (error) {
+      return {error: error.message};
     }
   }
 });
@@ -114,8 +115,9 @@ const createDirectories = async () => {
   const dirPath = path.join(__dirname, 'src', 'songs');
 
   try {
-    await fs.promises.mkdir(dirPath, { recursive: true });
-  } catch (err) {
+    await fs.promises.mkdir(dirPath, {recursive: true});
+  } 
+  catch (err) {
     console.error('Error creating directories:', err);
   }
 };
@@ -125,10 +127,14 @@ ipcMain.handle('registerUser', async (event, usern, password) => {
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     await db('users').insert({ username: `${usern}`, password: hashedPassword });
-    return { success: true };
+    return {success: true};
   } 
+
   catch (error) {
-    return { success: false, error: error.message };
+    if (error.message.includes('SQLITE_CONSTRAINT: UNIQUE constraint failed')){
+      return { success: false, error: 'Username taken'};
+    }
+    return {success: false, error: error.message};
   }
 });
 
@@ -137,12 +143,12 @@ ipcMain.handle('loginUser', async (event, username, password) => {
   try {
     const user = await db('users').where({ username }).first();
     if (!user) {
-      return { success: false, error: 'User not found' };
+      return {success: false, error: 'User not found'};
     }
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) {
-      return { success: false, error: 'Incorrect password' };
+      return {success: false, error: 'Incorrect password'};
     }
 
     return { success: true };
